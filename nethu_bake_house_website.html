@@ -1,0 +1,2360 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nethu Bake House | Freshly Baked With Love ❤️</title>
+    <meta name="description" content="Order delicious handcrafted cakes, custom celebration cakes, cupcakes, and bakery treats from Nethu Bake House. Direct delivery & WhatsApp ordering available.">
+    <meta name="keywords" content="Nethu Bake House, cakes, custom cakes, birthday cakes, bakery, cakes near me, custom cake order, bakery items, birthday cake order">
+    
+    <!-- Open Graph Meta -->
+    <meta property="og:title" content="Nethu Bake House | Premium Bakery & Custom Cakes">
+    <meta property="og:description" content="Freshly baked custom cakes, cupcakes, and gourmet desserts made specially for your celebrations.">
+    <meta property="og:type" content="website">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: {
+                            50: '#FFFBF7',
+                            100: '#FFF7EE',
+                            200: '#FFEEDD',
+                        },
+                        bakery: {
+                            pink: '#D8707C',
+                            lightpink: '#F9ECEE',
+                            rose: '#C05662',
+                            brown: '#4A2E2B',
+                            darkbrown: '#321D1B',
+                            gold: '#E5A823',
+                            lightgold: '#FDF6E2'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Schema.org Bakery Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Bakery",
+      "name": "Nethu Bake House",
+      "image": "https://images.unsplash.com/photo-1578985545062-69928b1d9587",
+      "telephone": "+94787129345",
+      "priceRange": "Rs. 150 - Rs. 15000",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Main Street Bakery Avenue",
+        "addressLocality": "Colombo",
+        "addressCountry": "LK"
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "opens": "08:00",
+        "closes": "20:00"
+      }
+    }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FFFBF7;
+            color: #4A2E2B;
+        }
+
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Floating Animation for Sprinkles/Decoration */
+        @keyframes float-slow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(6deg); }
+        }
+
+        @keyframes float-reverse {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(10px) rotate(-6deg); }
+        }
+
+        .animate-float-slow {
+            animation: float-slow 4s ease-in-out infinite;
+        }
+
+        .animate-float-reverse {
+            animation: float-reverse 5s ease-in-out infinite;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFFBF7;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D8707C;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #C05662;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(216, 112, 124, 0.15);
+        }
+
+        .tab-btn.active {
+            color: #D8707C;
+            border-bottom: 2px solid #D8707C;
+            font-weight: 600;
+        }
+
+        /* Toast notification */
+        #toast {
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-bakery-pink selection:text-white">
+
+    <div id="announcement-bar" class="bg-bakery-brown text-amber-100 text-xs sm:text-sm py-2 px-4 text-center font-medium flex justify-between items-center px-6">
+        <span class="mx-auto flex items-center gap-2">
+            <i class="fa-solid fa-cake-candles text-bakery-gold animate-bounce"></i>
+            <span id="announcement-text">Welcome to Nethu Bake House! Order custom cakes online or via WhatsApp: 0787129345</span>
+        </span>
+        <button onclick="document.getElementById('announcement-bar').style.display='none'" class="text-amber-200 hover:text-white text-xs">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-sm border-b border-bakery-pink/10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo -->
+                <div class="flex items-center gap-3 cursor-pointer" onclick="showView('home')">
+                    <div id="site-logo-container" class="w-12 h-12 rounded-full bg-bakery-lightpink flex items-center justify-center border-2 border-bakery-pink shadow-inner overflow-hidden">
+                        <i class="fa-solid fa-utensils text-bakery-pink text-xl"></i>
+                    </div>
+                    <div>
+                        <span id="site-brand-name" class="font-serif font-bold text-xl sm:text-2xl text-bakery-brown tracking-tight block leading-tight">Nethu Bake House</span>
+                        <span class="text-[10px] uppercase tracking-widest text-bakery-pink font-semibold">Artisanal Bakery & Desserts</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden lg:flex items-center gap-8 font-medium text-sm text-bakery-brown">
+                    <button onclick="showView('home')" class="nav-link hover:text-bakery-pink transition-colors py-1" id="nav-home">Home</button>
+                    <button onclick="showView('menu')" class="nav-link hover:text-bakery-pink transition-colors py-1" id="nav-menu">Menu & Products</button>
+                    <button onclick="showView('builder')" class="nav-link hover:text-bakery-pink transition-colors py-1 flex items-center gap-1.5" id="nav-builder">
+                        <i class="fa-solid fa-wand-magic-sparkles text-bakery-gold text-xs"></i> Custom Cake
+                    </button>
+                    <button onclick="showView('gallery')" class="nav-link hover:text-bakery-pink transition-colors py-1" id="nav-gallery">Gallery</button>
+                    <button onclick="showView('about')" class="nav-link hover:text-bakery-pink transition-colors py-1" id="nav-about">About Us</button>
+                    <button onclick="showView('contact')" class="nav-link hover:text-bakery-pink transition-colors py-1" id="nav-contact">Contact</button>
+                </nav>
+
+                <!-- Actions Right Side -->
+                <div class="flex items-center gap-3 sm:gap-4">
+                    <!-- WhatsApp Header Button -->
+                    <a id="header-whatsapp-btn" href="https://wa.me/94787129345?text=Hello%20Nethu%20Bake%20House!%20I'd%20like%20to%20inquire%20about%20cakes." target="_blank" class="hidden sm:inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-3.5 py-2 rounded-full shadow-sm transition-all transform hover:scale-105">
+                        <i class="fa-brands fa-whatsapp text-base"></i>
+                        <span>0787129345</span>
+                    </a>
+
+                    <!-- Cart Button -->
+                    <button onclick="toggleCartDrawer()" class="relative p-2.5 text-bakery-brown hover:text-bakery-pink transition-colors rounded-full hover:bg-bakery-lightpink/50">
+                        <i class="fa-solid fa-basket-shopping text-xl"></i>
+                        <span id="cart-badge-count" class="absolute -top-1 -right-1 bg-bakery-pink text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white">0</span>
+                    </button>
+
+                    <!-- Admin Link Badge -->
+                    <button onclick="showView('admin')" class="p-2 text-gray-500 hover:text-bakery-brown text-sm font-semibold rounded-lg hover:bg-gray-100 transition-colors" title="Admin Portal">
+                        <i class="fa-solid fa-user-shield text-lg"></i>
+                    </button>
+
+                    <!-- Mobile Menu Button -->
+                    <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-bakery-brown text-xl">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Navigation -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-bakery-pink/20 px-4 pt-2 pb-6 space-y-3">
+            <button onclick="showView('home'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 text-base font-medium text-bakery-brown hover:bg-bakery-lightpink rounded-lg">Home</button>
+            <button onclick="showView('menu'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 text-base font-medium text-bakery-brown hover:bg-bakery-lightpink rounded-lg">Menu & Products</button>
+            <button onclick="showView('builder'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 text-base font-medium text-bakery-brown hover:bg-bakery-lightpink rounded-lg">✨ Custom Cake Builder</button>
+            <button onclick="showView('gallery'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 text-base font-medium text-bakery-brown hover:bg-bakery-lightpink rounded-lg">Photo Gallery</button>
+            <button onclick="showView('about'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 text-base font-medium text-bakery-brown hover:bg-bakery-lightpink rounded-lg">About Us</button>
+            <button onclick="showView('contact'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 text-base font-medium text-bakery-brown hover:bg-bakery-lightpink rounded-lg">Contact Us</button>
+            <button onclick="showView('admin'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 text-base font-medium text-purple-700 bg-purple-50 hover:bg-purple-100 rounded-lg">Admin Portal</button>
+            
+            <a id="mobile-whatsapp-link" href="https://wa.me/94787129345" target="_blank" class="flex items-center justify-center gap-2 bg-emerald-600 text-white font-medium py-2.5 rounded-lg w-full mt-2">
+                <i class="fa-brands fa-whatsapp text-lg"></i> Direct WhatsApp Order
+            </a>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+
+        <!-- ========================================== -->
+        <!-- VIEW 1: HOME PAGE                          -->
+        <!-- ========================================== -->
+        <section id="view-home" class="view-section">
+            
+            <!-- Hero Section -->
+            <div class="relative bg-gradient-to-b from-bakery-lightpink/60 via-cream-50 to-cream-50 overflow-hidden py-12 lg:py-20">
+                <!-- Floating Bakery Decor SVG Sprinkles -->
+                <div class="absolute top-10 left-10 text-bakery-pink/20 text-4xl animate-float-slow pointer-events-none">✨</div>
+                <div class="absolute top-1/3 right-12 text-bakery-gold/30 text-3xl animate-float-reverse pointer-events-none">🧁</div>
+                <div class="absolute bottom-10 left-1/4 text-bakery-pink/25 text-3xl animate-float-slow pointer-events-none">❤️</div>
+
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        
+                        <div class="text-center lg:text-left space-y-6">
+                            <span class="inline-block bg-white text-bakery-rose text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full shadow-sm border border-bakery-pink/20">
+                                🍰 Handcrafted Fresh Daily in Town
+                            </span>
+                            
+                            <h1 id="hero-headline" class="font-serif text-4xl sm:text-5xl lg:text-6xl font-extrabold text-bakery-brown leading-tight">
+                                Freshly Baked With Love ❤️
+                            </h1>
+                            
+                            <p id="hero-subheading" class="text-gray-600 text-base sm:text-lg max-w-xl mx-auto lg:mx-0">
+                                Delicious artisan cakes, custom celebration desserts, pastries, and sweet treats crafted with premium ingredients for your special moments.
+                            </p>
+
+                            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+                                <button onclick="showView('menu')" class="bg-bakery-pink hover:bg-bakery-rose text-white font-semibold px-7 py-3.5 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+                                    <i class="fa-solid fa-utensils text-sm"></i> Order Now
+                                </button>
+                                
+                                <button onclick="showView('builder')" class="bg-white text-bakery-brown hover:text-bakery-pink font-semibold px-7 py-3.5 rounded-full shadow-md border border-bakery-pink/20 hover:border-bakery-pink transition-all flex items-center gap-2">
+                                    <i class="fa-solid fa-wand-magic-sparkles text-bakery-gold"></i> Customize Your Cake
+                                </button>
+                            </div>
+
+                            <!-- Highlights -->
+                            <div class="pt-6 grid grid-cols-3 gap-4 border-t border-bakery-pink/15 text-center lg:text-left">
+                                <div>
+                                    <p class="font-bold text-bakery-brown text-xl sm:text-2xl font-serif">100%</p>
+                                    <p class="text-xs text-gray-500 font-medium">Fresh Ingredients</p>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-bakery-brown text-xl sm:text-2xl font-serif">500+</p>
+                                    <p class="text-xs text-gray-500 font-medium">Happy Orders</p>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-bakery-brown text-xl sm:text-2xl font-serif">Fast</p>
+                                    <p class="text-xs text-gray-500 font-medium">WhatsApp Delivery</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Hero Image Display -->
+                        <div class="relative flex justify-center">
+                            <div class="relative w-full max-w-md lg:max-w-none">
+                                <div class="absolute -inset-4 bg-gradient-to-r from-bakery-pink to-bakery-gold rounded-3xl blur-2xl opacity-30 animate-pulse"></div>
+                                <img id="hero-banner-image" src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80" alt="Nethu Bake House Signature Cake" class="relative rounded-3xl shadow-2xl object-cover w-full h-[380px] sm:h-[460px] border-4 border-white">
+                                
+                                <!-- Floating Review Badge -->
+                                <div class="absolute -bottom-6 -left-4 sm:left-6 glass-card p-4 rounded-2xl shadow-xl flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-500 font-bold">
+                                        ★
+                                    </div>
+                                    <div class="text-xs">
+                                        <div class="flex text-amber-400 gap-0.5">
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                        </div>
+                                        <p class="font-semibold text-bakery-brown mt-0.5">4.9/5 Rating from 200+ Reviews</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bakery Categories Showcase -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <span class="text-bakery-pink font-semibold text-xs tracking-widest uppercase">Explore Our Bakery</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-bakery-brown mt-1">Popular Categories</h2>
+                    <p class="text-gray-500 text-sm mt-2">Discover our freshly baked range of custom cakes, pastries, cookies, and gourmet treats.</p>
+                </div>
+
+                <div id="home-categories-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                    <!-- Dynamic categories loaded via JS -->
+                </div>
+            </div>
+
+            <!-- Featured Products Carousel / Grid -->
+            <div class="bg-bakery-lightpink/30 py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10">
+                        <div>
+                            <span class="text-bakery-pink font-semibold text-xs tracking-widest uppercase">Specials & Best Sellers</span>
+                            <h2 class="font-serif text-3xl sm:text-4xl font-bold text-bakery-brown mt-1">Featured Creations</h2>
+                        </div>
+                        <button onclick="showView('menu')" class="mt-4 sm:mt-0 text-bakery-pink hover:text-bakery-rose font-semibold text-sm flex items-center gap-1 group">
+                            View All Items <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"></i>
+                        </button>
+                    </div>
+
+                    <div id="home-featured-products" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- Dynamic featured products JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Why Choose Us -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <span class="text-bakery-pink font-semibold text-xs tracking-widest uppercase">Our Promise</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-bakery-brown mt-1">Why Choose Nethu Bake House?</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="bg-white p-6 rounded-2xl border border-bakery-pink/10 shadow-sm text-center hover:shadow-md transition-shadow">
+                        <div class="w-14 h-14 bg-amber-50 rounded-2xl flex items-center justify-center text-bakery-gold text-2xl mx-auto mb-4">
+                            <i class="fa-solid fa-wheat-awn"></i>
+                        </div>
+                        <h3 class="font-serif font-bold text-lg text-bakery-brown">100% Fresh Ingredients</h3>
+                        <p class="text-xs text-gray-500 mt-2 leading-relaxed">We use real butter, pure cocoa, fresh fruits, and premium ingredients with zero preservative shortcuts.</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-bakery-pink/10 shadow-sm text-center hover:shadow-md transition-shadow">
+                        <div class="w-14 h-14 bg-rose-50 rounded-2xl flex items-center justify-center text-bakery-pink text-2xl mx-auto mb-4">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </div>
+                        <h3 class="font-serif font-bold text-lg text-bakery-brown">Custom Design Studio</h3>
+                        <p class="text-xs text-gray-500 mt-2 leading-relaxed">Bring your exact cake dream to life with our interactive theme, weight, and flavor customization tool.</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-bakery-pink/10 shadow-sm text-center hover:shadow-md transition-shadow">
+                        <div class="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 text-2xl mx-auto mb-4">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
+                        <h3 class="font-serif font-bold text-lg text-bakery-brown">Express WhatsApp Order</h3>
+                        <p class="text-xs text-gray-500 mt-2 leading-relaxed">Direct instant response on WhatsApp (0787129345) for quick orders, price quotes, and delivery setup.</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-bakery-pink/10 shadow-sm text-center hover:shadow-md transition-shadow">
+                        <div class="w-14 h-14 bg-purple-50 rounded-2xl flex items-center justify-center text-purple-600 text-2xl mx-auto mb-4">
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                        <h3 class="font-serif font-bold text-lg text-bakery-brown">Handcrafted Daily</h3>
+                        <p class="text-xs text-gray-500 mt-2 leading-relaxed">Every cake, brownie, and cupcake is baked fresh to order for ultimate moistness and flavor depth.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customer Reviews / Testimonials -->
+            <div class="bg-cream-100 py-16 border-y border-bakery-pink/10">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-2xl mx-auto mb-12">
+                        <span class="text-bakery-pink font-semibold text-xs tracking-widest uppercase">Sweet Words</span>
+                        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-bakery-brown mt-1">What Our Customers Say</h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-white p-6 rounded-2xl shadow-sm relative">
+                            <div class="text-amber-400 text-sm mb-3">★★★★★</div>
+                            <p class="text-xs text-gray-600 italic mb-4">"The custom Red Velvet birthday cake for my daughter was breathtaking! Exactly as we discussed on WhatsApp, perfectly moist and not too sweet."</p>
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-full bg-bakery-pink text-white font-bold flex items-center justify-center text-sm">S</div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-bakery-brown">Sarah Fernando</h4>
+                                    <span class="text-[10px] text-gray-400">Verified Customer</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-2xl shadow-sm relative">
+                            <div class="text-amber-400 text-sm mb-3">★★★★★</div>
+                            <p class="text-xs text-gray-600 italic mb-4">"Nethu Bake House delivered our 2kg chocolate drip wedding anniversary cake right on time. Outstanding packaging and incredible taste!"</p>
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-full bg-bakery-brown text-white font-bold flex items-center justify-center text-sm">D</div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-bakery-brown">Dinesh Perera</h4>
+                                    <span class="text-[10px] text-gray-400">Verified Customer</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-2xl shadow-sm relative">
+                            <div class="text-amber-400 text-sm mb-3">★★★★★</div>
+                            <p class="text-xs text-gray-600 italic mb-4">"Best fudgy brownies and custom cupcakes in town! Ordering through the WhatsApp button made everything smooth and fast."</p>
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-full bg-bakery-gold text-white font-bold flex items-center justify-center text-sm">K</div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-bakery-brown">Kavindi Silva</h4>
+                                    <span class="text-[10px] text-gray-400">Verified Customer</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ========================================== -->
+        <!-- VIEW 2: MENU & PRODUCTS PAGE              -->
+        <!-- ========================================== -->
+        <section id="view-menu" class="view-section hidden py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Page Header -->
+                <div class="text-center max-w-2xl mx-auto mb-8">
+                    <h1 class="font-serif text-3xl sm:text-4xl font-bold text-bakery-brown">Bakery Menu & Catalog</h1>
+                    <p class="text-gray-500 text-sm mt-2">Explore our freshly baked signature cakes, sweet desserts, and artisan bakery products.</p>
+                </div>
+
+                <!-- Search, Filter & Sorting Bar -->
+                <div class="bg-white p-4 rounded-2xl border border-bakery-pink/15 shadow-sm mb-8 space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        
+                        <!-- Search Box -->
+                        <div class="relative">
+                            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-gray-400 text-sm"></i>
+                            <input type="text" id="menu-search-input" oninput="filterAndRenderProducts()" placeholder="Search cake, brownie, cupcake..." class="w-full pl-10 pr-4 py-2.5 bg-cream-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-bakery-pink">
+                        </div>
+
+                        <!-- Sort Dropdown -->
+                        <div>
+                            <select id="menu-sort-select" onchange="filterAndRenderProducts()" class="w-full py-2.5 px-3 bg-cream-50 border border-gray-200 rounded-xl text-sm text-bakery-brown focus:outline-none focus:border-bakery-pink">
+                                <option value="featured">Featured First</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                                <option value="name">Product Name (A-Z)</option>
+                            </select>
+                        </div>
+
+                        <!-- Quick Reset -->
+                        <div class="flex items-center justify-between sm:justify-end gap-2">
+                            <span id="product-count-badge" class="text-xs text-gray-500 font-medium px-3 py-2 bg-cream-100 rounded-lg">Showing 0 Items</span>
+                            <button onclick="resetMenuFilters()" class="text-xs text-bakery-pink hover:text-bakery-rose font-medium px-3 py-2 border border-bakery-pink/20 rounded-lg hover:bg-bakery-lightpink/30">
+                                Reset Filters
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Category Filter Badges -->
+                    <div id="category-filter-badges" class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none pt-2 border-t border-gray-100">
+                        <!-- Dynamic Category Badges -->
+                    </div>
+                </div>
+
+                <!-- Product Grid -->
+                <div id="menu-products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Dynamic Product Cards -->
+                </div>
+
+                <!-- Empty Search State -->
+                <div id="menu-empty-state" class="hidden text-center py-16 bg-white rounded-2xl border border-dashed border-gray-200">
+                    <i class="fa-solid fa-cookie-bite text-4xl text-bakery-pink/40 mb-3"></i>
+                    <h3 class="font-serif text-lg font-bold text-bakery-brown">No Bakery Items Found</h3>
+                    <p class="text-xs text-gray-500 mt-1">Try adjusting your search keyword or selected category filter.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- VIEW 3: CUSTOM CAKE BUILDER                -->
+        <!-- ========================================== -->
+        <section id="view-builder" class="view-section hidden py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <span class="text-bakery-pink font-semibold text-xs tracking-widest uppercase">Interactive Studio</span>
+                    <h1 class="font-serif text-3xl sm:text-4xl font-bold text-bakery-brown mt-1">Design Your Custom Cake ✨</h1>
+                    <p class="text-gray-500 text-sm mt-2">Pick your weight, flavor, filling, shape, and custom text to estimate live pricing and place your custom order directly.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    
+                    <!-- Cake Builder Options Form (Left Column) -->
+                    <div class="lg:col-span-7 bg-white p-6 sm:p-8 rounded-3xl border border-bakery-pink/20 shadow-sm space-y-6">
+                        
+                        <!-- Step 1: Weight/Size -->
+                        <div>
+                            <label class="block text-xs font-bold text-bakery-brown uppercase tracking-wider mb-2">1. Select Cake Size / Weight</label>
+                            <div class="grid grid-cols-3 sm:grid-cols-6 gap-2" id="builder-size-options">
+                                <button type="button" onclick="selectCakeOption('size', '500g', 2500)" class="option-btn p-3 text-center border-2 border-gray-200 rounded-xl hover:border-bakery-pink transition-all active" data-type="size" data-val="500g">
+                                    <span class="block font-bold text-sm">500g</span>
+                                    <span class="text-[10px] text-gray-500">Rs. 2,500</span>
+                                </button>
+                                <button type="button" onclick="selectCakeOption('size', '1kg', 4500)" class="option-btn p-3 text-center border-2 border-gray-200 rounded-xl hover:border-bakery-pink transition-all" data-type="size" data-val="1kg">
+                                    <span class="block font-bold text-sm">1 kg</span>
+                                    <span class="text-[10px] text-gray-500">Rs. 4,500</span>
+                                </button>
+                                <button type="button" onclick="selectCakeOption('size', '1.5kg', 6500)" class="option-btn p-3 text-center border-2 border-gray-200 rounded-xl hover:border-bakery-pink transition-all" data-type="size" data-val="1.5kg">
+                                    <span class="block font-bold text-sm">1.5 kg</span>
+                                    <span class="text-[10px] text-gray-500">Rs. 6,500</span>
+                                </button>
+                                <button type="button" onclick="selectCakeOption('size', '2kg', 8500)" class="option-btn p-3 text-center border-2 border-gray-200 rounded-xl hover:border-bakery-pink transition-all" data-type="size" data-val="2kg">
+                                    <span class="block font-bold text-sm">2 kg</span>
+                                    <span class="text-[10px] text-gray-500">Rs. 8,500</span>
+                                </button>
+                                <button type="button" onclick="selectCakeOption('size', '3kg', 12500)" class="option-btn p-3 text-center border-2 border-gray-200 rounded-xl hover:border-bakery-pink transition-all" data-type="size" data-val="3kg">
+                                    <span class="block font-bold text-sm">3 kg</span>
+                                    <span class="text-[10px] text-gray-500">Rs. 12,500</span>
+                                </button>
+                                <button type="button" onclick="selectCakeOption('size', 'Custom', 15000)" class="option-btn p-3 text-center border-2 border-gray-200 rounded-xl hover:border-bakery-pink transition-all" data-type="size" data-val="Custom">
+                                    <span class="block font-bold text-sm">3kg+</span>
+                                    <span class="text-[10px] text-gray-500">Custom</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Flavor -->
+                        <div>
+                            <label class="block text-xs font-bold text-bakery-brown uppercase tracking-wider mb-2">2. Cake Flavor Base</label>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2" id="builder-flavor-options">
+                                <button type="button" onclick="selectCakeOption('flavor', 'Chocolate Fudge', 0)" class="option-btn p-3 text-left border-2 border-gray-200 rounded-xl hover:border-bakery-pink active" data-type="flavor" data-val="Chocolate Fudge">
+                                    <span class="block font-semibold text-xs">🍫 Chocolate Fudge</span>
+                                </button>
+                                <button type="button" onclick="selectCakeOption('flavor', 'Vanilla Bean', 0)" class="option-btn p-3 text-left border-2 border-gray-200 rounded-xl hover:border-bakery-pink" data-type="flavor" data-val="Vanilla Bean">
+                                    <span class="block font-semibold text-xs">🌼 Vanilla Bean</span>
+                                </button>
+                                <button type="button" onclick="selectCakeOption('flavor', 'Red Velvet', 500)" class="option-btn p-3 text-left border-2 border-gray-200 rounded-xl hover:border-bakery-pink" data-type="flavor" data-val="Red Velvet">
+                                    <span class="block font-semibold text-xs">❤️ Red Velvet (+Rs.500)</span>
+                                </button>
+                                <button type="button" onclick="selectCakeOption('flavor', 'Caramel Butter', 300)" class="option-btn p-3 text-left border-2 border-gray-200 rounded-xl hover:border-bakery-pink" data-type="flavor" data-val="Caramel Butter">
+                                    <span class="block font-semibold text-xs">🧈 Caramel Butter</span>
+                                </button>
+                                <button type="button" onclick="selectCakeOption('flavor', 'Coffee Crunch', 400)" class="option-btn p-3 text-left border-2 border-gray-200 rounded-xl hover:border-bakery-pink" data-type="flavor" data-val="Coffee Crunch">
+                                    <span class="block font-semibold text-xs">☕ Coffee Crunch</span>
+                                </button>
+                                <button type="button" onclick="selectCakeOption('flavor', 'Fresh Fruit Cake', 600)" class="option-btn p-3 text-left border-2 border-gray-200 rounded-xl hover:border-bakery-pink" data-type="flavor" data-val="Fresh Fruit Cake">
+                                    <span class="block font-semibold text-xs">🍓 Fresh Fruit Cake</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Filling -->
+                        <div>
+                            <label class="block text-xs font-bold text-bakery-brown uppercase tracking-wider mb-2">3. Filling & Cream Layer</label>
+                            <select id="builder-filling-select" onchange="updateCustomCakeSummary()" class="w-full p-3 bg-cream-50 border border-gray-200 rounded-xl text-sm font-medium focus:outline-none focus:border-bakery-pink">
+                                <option value="Rich Chocolate Ganache">Rich Chocolate Ganache</option>
+                                <option value="Vanilla Buttercream">Vanilla Buttercream</option>
+                                <option value="Strawberry Jam Layer">Strawberry Jam Layer (+Rs. 300)</option>
+                                <option value="Oreo Crumb Cream">Oreo Crumb Cream (+Rs. 300)</option>
+                                <option value="Salted Caramel Spread">Salted Caramel Spread (+Rs. 400)</option>
+                                <option value="Fresh Mango Cream">Fresh Mango Cream (+Rs. 450)</option>
+                            </select>
+                        </div>
+
+                        <!-- Step 4: Shape & Theme -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-bakery-brown uppercase tracking-wider mb-2">4. Cake Shape</label>
+                                <select id="builder-shape-select" onchange="updateCustomCakeSummary()" class="w-full p-3 bg-cream-50 border border-gray-200 rounded-xl text-sm font-medium focus:outline-none focus:border-bakery-pink">
+                                    <option value="Round Classic">Round Classic</option>
+                                    <option value="Square">Square Layer</option>
+                                    <option value="Heart Shape">Heart Shape (+Rs. 400)</option>
+                                    <option value="2-Tier Round">2-Tier Round (+Rs. 1,500)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-bakery-brown uppercase tracking-wider mb-2">5. Celebration Theme</label>
+                                <select id="builder-theme-select" onchange="updateCustomCakeSummary()" class="w-full p-3 bg-cream-50 border border-gray-200 rounded-xl text-sm font-medium focus:outline-none focus:border-bakery-pink">
+                                    <option value="Birthday Extravaganza">Birthday Extravaganza</option>
+                                    <option value="Wedding & Engagement">Wedding & Engagement (+Rs. 1,000)</option>
+                                    <option value="Anniversary Love">Anniversary Love</option>
+                                    <option value="Kids Fantasy Cartoon">Kids Fantasy Cartoon (+Rs. 500)</option>
+                                    <option value="Floral Luxe Elegance">Floral Luxe Elegance (+Rs. 600)</option>
+                                    <option value="Baby Shower">Baby Shower</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Step 5: Custom Wording & Notes -->
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-bold text-bakery-brown uppercase tracking-wider mb-1">6. Custom Cake Message (Text on Cake/Board)</label>
+                                <input type="text" id="builder-message-input" oninput="updateCustomCakeSummary()" placeholder='e.g., "Happy 25th Birthday Sarah ❤️"' class="w-full p-3 bg-cream-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-bakery-pink">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-bakery-brown uppercase tracking-wider mb-1">7. Reference Design Image Link / Notes</label>
+                                <input type="url" id="builder-image-url" onchange="updateCustomCakeSummary()" placeholder="Optional Image URL or Pinterest reference link" class="w-full p-3 bg-cream-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-bakery-pink">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-bakery-brown uppercase tracking-wider mb-1">8. Special Requests & Instructions</label>
+                                <textarea id="builder-instructions-input" rows="2" placeholder="Eggless preference, specific colors, topper requests..." class="w-full p-3 bg-cream-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-bakery-pink"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Interactive Live Preview & Summary Card (Right Column) -->
+                    <div class="lg:col-span-5 sticky top-28">
+                        <div class="bg-gradient-to-br from-bakery-lightpink/80 via-white to-amber-50/50 p-6 sm:p-8 rounded-3xl border-2 border-bakery-pink/30 shadow-xl space-y-6">
+                            
+                            <div class="flex items-center justify-between border-b border-bakery-pink/15 pb-4">
+                                <h3 class="font-serif text-xl font-bold text-bakery-brown">Live Cake Preview</h3>
+                                <span class="bg-bakery-pink text-white text-[10px] uppercase font-bold px-3 py-1 rounded-full">Custom Order</span>
+                            </div>
+
+                            <!-- Live Visual Display -->
+                            <div class="text-center bg-white p-6 rounded-2xl border border-bakery-pink/10 shadow-inner relative overflow-hidden">
+                                <div class="w-24 h-24 mx-auto rounded-full bg-amber-100 flex items-center justify-center text-bakery-pink text-5xl mb-3 shadow-md animate-bounce">
+                                    🎂
+                                </div>
+                                <h4 id="preview-title" class="font-serif text-lg font-bold text-bakery-brown">500g Chocolate Fudge Cake</h4>
+                                <p id="preview-message" class="text-xs italic text-bakery-rose font-medium mt-1">"Happy Birthday!"</p>
+                                
+                                <div class="mt-4 pt-4 border-t border-dashed border-gray-200 text-left text-xs space-y-1.5 text-gray-600">
+                                    <p><strong>Filling:</strong> <span id="summary-filling">Rich Chocolate Ganache</span></p>
+                                    <p><strong>Shape:</strong> <span id="summary-shape">Round Classic</span></p>
+                                    <p><strong>Theme:</strong> <span id="summary-theme">Birthday Extravaganza</span></p>
+                                </div>
+                            </div>
+
+                            <!-- Dynamic Price Estimate -->
+                            <div class="bg-white p-4 rounded-2xl border border-bakery-gold/30 text-center">
+                                <span class="text-xs text-gray-500 uppercase font-bold tracking-wider">Estimated Total</span>
+                                <div id="builder-estimated-price" class="font-serif text-3xl font-extrabold text-bakery-brown mt-0.5">Rs. 2,500</div>
+                                <p class="text-[10px] text-gray-400 mt-1">*Final quote confirmed via WhatsApp review</p>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="space-y-3">
+                                <button onclick="addCustomCakeToCart()" class="w-full bg-bakery-pink hover:bg-bakery-rose text-white font-semibold py-3.5 px-4 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 text-sm">
+                                    <i class="fa-solid fa-basket-shopping"></i> Add Custom Cake to Cart
+                                </button>
+
+                                <button onclick="orderCustomCakeViaWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3.5 px-4 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 text-sm">
+                                    <i class="fa-brands fa-whatsapp text-lg"></i> Direct Order via WhatsApp
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- VIEW 4: PHOTO GALLERY PAGE                 -->
+        <!-- ========================================== -->
+        <section id="view-gallery" class="view-section hidden py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <span class="text-bakery-pink font-semibold text-xs tracking-widest uppercase">Visual Delights</span>
+                    <h1 class="font-serif text-3xl sm:text-4xl font-bold text-bakery-brown mt-1">Nethu Bake House Gallery</h1>
+                    <p class="text-gray-500 text-sm mt-2">A peek into our handcrafted birthday cakes, wedding creations, cupcakes, and dessert setups.</p>
+                </div>
+
+                <!-- Gallery Categories -->
+                <div class="flex flex-wrap items-center justify-center gap-2 mb-8" id="gallery-filter-buttons">
+                    <button onclick="filterGallery('all')" class="gallery-filter-btn bg-bakery-pink text-white px-4 py-2 rounded-full text-xs font-semibold shadow-sm">All Creations</button>
+                    <button onclick="filterGallery('cakes')" class="gallery-filter-btn bg-white text-bakery-brown border border-gray-200 px-4 py-2 rounded-full text-xs font-semibold hover:border-bakery-pink">Birthday & Custom Cakes</button>
+                    <button onclick="filterGallery('wedding')" class="gallery-filter-btn bg-white text-bakery-brown border border-gray-200 px-4 py-2 rounded-full text-xs font-semibold hover:border-bakery-pink">Wedding Tier Cakes</button>
+                    <button onclick="filterGallery('cupcakes')" class="gallery-filter-btn bg-white text-bakery-brown border border-gray-200 px-4 py-2 rounded-full text-xs font-semibold hover:border-bakery-pink">Cupcakes & Treats</button>
+                </div>
+
+                <!-- Gallery Masonry Grid -->
+                <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Loaded dynamically via JS -->
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- VIEW 5: ABOUT US PAGE                      -->
+        <!-- ========================================== -->
+        <section id="view-about" class="view-section hidden py-12">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div class="relative">
+                        <img id="about-page-img" src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80" alt="Bakery Kitchen" class="rounded-3xl shadow-xl border-4 border-white object-cover h-[400px] w-full">
+                        <div class="absolute -bottom-6 -right-6 bg-bakery-brown text-amber-100 p-6 rounded-2xl shadow-lg hidden sm:block max-w-xs">
+                            <p class="font-serif font-bold text-xl">"Baked fresh with love every single morning."</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-5">
+                        <span class="text-bakery-pink font-semibold text-xs tracking-widest uppercase">Our Story</span>
+                        <h1 id="about-title" class="font-serif text-3xl sm:text-4xl font-bold text-bakery-brown">Welcome to Nethu Bake House</h1>
+                        
+                        <div id="about-description-text" class="text-gray-600 text-sm leading-relaxed space-y-3">
+                            <p>Founded with a passion for genuine artisanal baking, Nethu Bake House creates handcrafted cakes, cupcakes, and sweet delicacies for every milestone event in your life.</p>
+                            <p>From luxurious birthday cakes to custom theme cakes and everyday sweet slices, we use only high-grade butter, cocoa, real vanilla, and pure dairy cream with uncompromised hygienic standards.</p>
+                        </div>
+
+                        <div class="pt-4 grid grid-cols-2 gap-4">
+                            <div class="bg-white p-4 rounded-xl border border-bakery-pink/20">
+                                <i class="fa-solid fa-medal text-bakery-pink text-xl mb-1"></i>
+                                <h4 class="font-serif font-bold text-sm text-bakery-brown">Premium Quality</h4>
+                                <p class="text-[11px] text-gray-500">No preservatives or cheap substitutes.</p>
+                            </div>
+                            <div class="bg-white p-4 rounded-xl border border-bakery-pink/20">
+                                <i class="fa-solid fa-truck-fast text-bakery-gold text-xl mb-1"></i>
+                                <h4 class="font-serif font-bold text-sm text-bakery-brown">Doorstep Delivery</h4>
+                                <p class="text-[11px] text-gray-500">Carefully packaged and delivered fresh.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- VIEW 6: CONTACT PAGE                       -->
+        <!-- ========================================== -->
+        <section id="view-contact" class="view-section hidden py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <span class="text-bakery-pink font-semibold text-xs tracking-widest uppercase">Get In Touch</span>
+                    <h1 class="font-serif text-3xl sm:text-4xl font-bold text-bakery-brown mt-1">Contact Nethu Bake House</h1>
+                    <p class="text-gray-500 text-sm mt-2">Have a custom order query or special event catering request? Reach out directly!</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    
+                    <!-- Contact Cards (Left Column) -->
+                    <div class="lg:col-span-5 space-y-4">
+                        
+                        <div class="bg-white p-6 rounded-2xl border border-bakery-pink/20 shadow-sm flex items-start gap-4">
+                            <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center text-xl flex-shrink-0">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-serif font-bold text-base text-bakery-brown">WhatsApp & Phone Hotline</h3>
+                                <p id="contact-info-phone" class="text-xs text-gray-600 mt-1">0787129345 / +94 78 712 9345</p>
+                                <a id="contact-whatsapp-link" href="https://wa.me/94787129345" target="_blank" class="inline-block text-xs text-emerald-600 font-semibold hover:underline mt-2">
+                                    Click to Chat on WhatsApp &rarr;
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-2xl border border-bakery-pink/20 shadow-sm flex items-start gap-4">
+                            <div class="w-12 h-12 bg-rose-100 text-bakery-pink rounded-xl flex items-center justify-center text-xl flex-shrink-0">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-serif font-bold text-base text-bakery-brown">Opening Hours</h3>
+                                <p id="contact-info-hours" class="text-xs text-gray-600 mt-1">Monday - Sunday: 8:00 AM – 8:00 PM</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-2xl border border-bakery-pink/20 shadow-sm flex items-start gap-4">
+                            <div class="w-12 h-12 bg-amber-100 text-bakery-gold rounded-xl flex items-center justify-center text-xl flex-shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-serif font-bold text-base text-bakery-brown">Bakery Location</h3>
+                                <p id="contact-info-address" class="text-xs text-gray-600 mt-1">Main Street Bakery Avenue, Colombo, Sri Lanka</p>
+                            </div>
+                        </div>
+
+                        <!-- Embedded Placeholder Map -->
+                        <div class="bg-gray-100 rounded-2xl h-48 border border-gray-200 flex items-center justify-center text-gray-400 text-xs">
+                            <div class="text-center">
+                                <i class="fa-solid fa-map-location-dot text-3xl text-bakery-pink/40 mb-2"></i>
+                                <p>Google Maps Location Frame</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Contact Inquiry Form (Right Column) -->
+                    <div class="lg:col-span-7 bg-white p-8 rounded-3xl border border-bakery-pink/20 shadow-sm">
+                        <h2 class="font-serif text-2xl font-bold text-bakery-brown mb-6">Send Us a Direct Message</h2>
+                        
+                        <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-600 mb-1">Your Full Name *</label>
+                                    <input type="text" required id="contact-name" class="w-full p-3 bg-cream-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-bakery-pink">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-600 mb-1">WhatsApp / Phone Number *</label>
+                                    <input type="tel" required id="contact-phone" class="w-full p-3 bg-cream-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-bakery-pink">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-600 mb-1">Email Address</label>
+                                <input type="email" id="contact-email" class="w-full p-3 bg-cream-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-bakery-pink">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-600 mb-1">Your Message or Inquiry *</label>
+                                <textarea required id="contact-message" rows="4" placeholder="Tell us about your event, cake requirements, or query..." class="w-full p-3 bg-cream-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-bakery-pink"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full bg-bakery-brown hover:bg-bakery-darkbrown text-white font-semibold py-3.5 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 text-sm">
+                                <i class="fa-solid fa-paper-plane"></i> Send Inquiry via WhatsApp
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- VIEW 7: CHECKOUT & ORDER CONFIRMATION      -->
+        <!-- ========================================== -->
+        <section id="view-checkout" class="view-section hidden py-10">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Checkout Form Screen -->
+                <div id="checkout-form-container">
+                    <div class="text-center mb-8">
+                        <h1 class="font-serif text-3xl font-bold text-bakery-brown">Complete Your Order</h1>
+                        <p class="text-xs text-gray-500 mt-1">Fill in your delivery details below to confirm your order.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                        
+                        <!-- Customer Details Form -->
+                        <div class="lg:col-span-7 bg-white p-6 sm:p-8 rounded-3xl border border-bakery-pink/20 shadow-sm space-y-4">
+                            <h2 class="font-serif text-lg font-bold text-bakery-brown border-b pb-3">Delivery Information</h2>
+                            
+                            <form id="checkout-main-form" onsubmit="processCheckoutOrder(event)" class="space-y-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-700 mb-1">Full Name *</label>
+                                    <input type="text" id="chk-name" required placeholder="e.g., Anuki Perera" class="w-full p-3 bg-cream-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-bakery-pink">
+                                </div>
+
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-xs font-semibold text-gray-700 mb-1">WhatsApp Number *</label>
+                                        <input type="tel" id="chk-phone" required placeholder="0787129345" class="w-full p-3 bg-cream-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-bakery-pink">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-gray-700 mb-1">Email Address</label>
+                                        <input type="email" id="chk-email" placeholder="name@domain.com" class="w-full p-3 bg-cream-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-bakery-pink">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-700 mb-1">Delivery Address *</label>
+                                    <textarea id="chk-address" required rows="2" placeholder="Full delivery address, street, house number..." class="w-full p-3 bg-cream-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-bakery-pink"></textarea>
+                                </div>
+
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-xs font-semibold text-gray-700 mb-1">Delivery Date *</label>
+                                        <input type="date" id="chk-date" required class="w-full p-3 bg-cream-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-bakery-pink">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-gray-700 mb-1">Preferred Time *</label>
+                                        <select id="chk-time" required class="w-full p-3 bg-cream-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-bakery-pink">
+                                            <option value="Morning (9:00 AM - 12:00 PM)">Morning (9:00 AM - 12:00 PM)</option>
+                                            <option value="Afternoon (12:00 PM - 4:00 PM)">Afternoon (12:00 PM - 4:00 PM)</option>
+                                            <option value="Evening (4:00 PM - 7:00 PM)">Evening (4:00 PM - 7:00 PM)</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-700 mb-1">Special Order Notes</label>
+                                    <textarea id="chk-notes" rows="2" placeholder="Candle count, write-ups on box..." class="w-full p-3 bg-cream-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-bakery-pink"></textarea>
+                                </div>
+
+                                <div class="pt-2 flex flex-col gap-3">
+                                    <button type="submit" class="w-full bg-bakery-pink hover:bg-bakery-rose text-white font-semibold py-3.5 rounded-xl shadow-md transition-all text-sm flex items-center justify-center gap-2">
+                                        <i class="fa-solid fa-check-circle"></i> Place Order via Website
+                                    </button>
+
+                                    <button type="button" onclick="submitOrderViaWhatsAppOnly()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3.5 rounded-xl shadow-md transition-all text-sm flex items-center justify-center gap-2">
+                                        <i class="fa-brands fa-whatsapp text-lg"></i> Direct Send Order to WhatsApp
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Order Summary Box -->
+                        <div class="lg:col-span-5 bg-cream-100 p-6 rounded-3xl border border-bakery-pink/20">
+                            <h3 class="font-serif font-bold text-lg text-bakery-brown mb-4 border-b pb-2">Order Summary</h3>
+                            <div id="checkout-items-list" class="space-y-3 max-h-60 overflow-y-auto pr-1 mb-4 text-xs">
+                                <!-- Dynamic checkout items list -->
+                            </div>
+
+                            <div class="space-y-2 text-xs border-t border-bakery-pink/15 pt-3">
+                                <div class="flex justify-between text-gray-600">
+                                    <span>Subtotal</span>
+                                    <span id="chk-summary-subtotal">Rs. 0</span>
+                                </div>
+                                <div class="flex justify-between text-gray-600">
+                                    <span>Delivery Fee</span>
+                                    <span id="chk-summary-delivery">Rs. 350</span>
+                                </div>
+                                <div class="flex justify-between font-bold text-bakery-brown text-sm border-t border-gray-200 pt-2">
+                                    <span>Grand Total</span>
+                                    <span id="chk-summary-total" class="text-bakery-pink">Rs. 350</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Order Confirmation Success View (Shown after submission) -->
+                <div id="checkout-success-container" class="hidden text-center bg-white p-8 sm:p-12 rounded-3xl border-2 border-bakery-pink/30 shadow-2xl max-w-xl mx-auto space-y-6">
+                    <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-4xl mx-auto shadow-inner">
+                        ✓
+                    </div>
+                    <div>
+                        <h2 class="font-serif text-3xl font-extrabold text-bakery-brown">Thank You For Your Order! ❤️</h2>
+                        <p class="text-xs text-gray-500 mt-1">Your bakery order has been logged into our system.</p>
+                    </div>
+
+                    <div class="bg-cream-50 p-4 rounded-2xl border text-left text-xs space-y-2">
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Order Reference ID:</span>
+                            <span id="success-order-id" class="font-bold text-bakery-brown">#NBH-0000</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Customer Name:</span>
+                            <span id="success-customer-name" class="font-semibold text-bakery-brown">-</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Scheduled Delivery:</span>
+                            <span id="success-delivery-date" class="font-semibold text-bakery-brown">-</span>
+                        </div>
+                        <div class="flex justify-between border-t pt-2 font-bold text-sm">
+                            <span>Total Amount:</span>
+                            <span id="success-total-amount" class="text-bakery-pink">Rs. 0</span>
+                        </div>
+                    </div>
+
+                    <a id="success-whatsapp-btn" href="#" target="_blank" class="block w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3.5 rounded-xl shadow-md transition-all text-sm flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> Send Order Details to WhatsApp
+                    </a>
+
+                    <button onclick="showView('home')" class="text-xs text-bakery-pink hover:underline font-semibold">
+                        &larr; Return to Homepage
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- VIEW 8: ADMIN DASHBOARD (Auth protected)   -->
+        <!-- ========================================== -->
+        <section id="view-admin" class="view-section hidden py-10 bg-gray-50 min-h-screen">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Admin Login Screen (Demo Auth) -->
+                <div id="admin-login-screen" class="max-w-md mx-auto bg-white p-8 rounded-3xl shadow-xl border border-gray-200 text-center space-y-6">
+                    <div class="w-16 h-16 rounded-full bg-bakery-lightpink mx-auto flex items-center justify-center text-bakery-pink text-2xl">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-serif text-2xl font-bold text-bakery-brown">Admin Portal Login</h2>
+                        <p class="text-xs text-gray-500 mt-1">Nethu Bake House Management Studio</p>
+                    </div>
+
+                    <div class="space-y-4 text-left">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Username / Email</label>
+                            <input type="text" id="admin-username-input" value="admin@nethubakehouse.com" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Password</label>
+                            <input type="password" id="admin-password-input" value="123456" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm">
+                        </div>
+                        <span class="block text-[10px] text-amber-600 italic">*Demo Auth Notice: Click login below to access full dashboard features.</span>
+                        <button onclick="handleAdminLogin()" class="w-full bg-bakery-brown hover:bg-bakery-darkbrown text-white font-semibold py-3.5 rounded-xl shadow-md transition-all text-sm">
+                            Access Admin Dashboard
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Admin Main Dashboard Panel (Shown when logged in) -->
+                <div id="admin-panel-container" class="hidden space-y-8">
+                    
+                    <!-- Admin Header Bar -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between bg-white p-6 rounded-2xl shadow-sm border border-gray-200 gap-4">
+                        <div>
+                            <h1 class="font-serif text-2xl font-bold text-bakery-brown">Nethu Bake House Admin Dashboard</h1>
+                            <p class="text-xs text-gray-500">Manage products, categories, web orders, and store settings without touching HTML code.</p>
+                        </div>
+                        <button onclick="handleAdminLogout()" class="self-start sm:self-auto bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2">
+                            <i class="fa-solid fa-right-from-bracket"></i> Logout Admin
+                        </button>
+                    </div>
+
+                    <!-- Stat Cards -->
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                        <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+                            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Total Products</span>
+                            <div id="admin-stat-products" class="text-2xl font-bold text-bakery-brown mt-1">0</div>
+                        </div>
+                        <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+                            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Total Orders</span>
+                            <div id="admin-stat-orders" class="text-2xl font-bold text-bakery-brown mt-1">0</div>
+                        </div>
+                        <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+                            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Pending Orders</span>
+                            <div id="admin-stat-pending" class="text-2xl font-bold text-amber-600 mt-1">0</div>
+                        </div>
+                        <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+                            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Completed</span>
+                            <div id="admin-stat-completed" class="text-2xl font-bold text-emerald-600 mt-1">0</div>
+                        </div>
+                        <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm col-span-2 md:col-span-1">
+                            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Est. Revenue</span>
+                            <div id="admin-stat-sales" class="text-2xl font-bold text-bakery-pink mt-1">Rs. 0</div>
+                        </div>
+                    </div>
+
+                    <!-- Admin Tabs Navigation -->
+                    <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+                        <div class="flex border-b overflow-x-auto">
+                            <button onclick="switchAdminTab('products')" id="admin-tab-btn-products" class="px-6 py-3.5 text-xs font-bold text-bakery-pink border-b-2 border-bakery-pink">
+                                Products Management
+                            </button>
+                            <button onclick="switchAdminTab('categories')" id="admin-tab-btn-categories" class="px-6 py-3.5 text-xs font-bold text-gray-500 hover:text-bakery-brown">
+                                Categories
+                            </button>
+                            <button onclick="switchAdminTab('orders')" id="admin-tab-btn-orders" class="px-6 py-3.5 text-xs font-bold text-gray-500 hover:text-bakery-brown">
+                                Customer Orders
+                            </button>
+                            <button onclick="switchAdminTab('settings')" id="admin-tab-btn-settings" class="px-6 py-3.5 text-xs font-bold text-gray-500 hover:text-bakery-brown">
+                                Website Settings
+                            </button>
+                        </div>
+
+                        <div class="p-6">
+                            
+                            <!-- TAB 1: PRODUCT MANAGEMENT -->
+                            <div id="admin-tab-products" class="admin-subtab">
+                                <div class="flex items-center justify-between mb-6">
+                                    <h3 class="font-serif font-bold text-lg text-bakery-brown">Product Catalog</h3>
+                                    <button onclick="openProductModal()" class="bg-bakery-pink hover:bg-bakery-rose text-white text-xs font-semibold px-4 py-2 rounded-xl shadow-sm flex items-center gap-2">
+                                        <i class="fa-solid fa-plus"></i> Add New Product
+                                    </button>
+                                </div>
+
+                                <div class="overflow-x-auto">
+                                    <table class="w-full text-left text-xs text-gray-600 border-collapse">
+                                        <thead>
+                                            <tr class="bg-gray-100 text-gray-700 font-bold border-b">
+                                                <th class="p-3">Product</th>
+                                                <th class="p-3">Category</th>
+                                                <th class="p-3">Price</th>
+                                                <th class="p-3">Status</th>
+                                                <th class="p-3">Featured</th>
+                                                <th class="p-3 text-right">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="admin-products-table-body">
+                                            <!-- Loaded dynamically -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- TAB 2: CATEGORIES MANAGEMENT -->
+                            <div id="admin-tab-categories" class="admin-subtab hidden">
+                                <div class="flex items-center justify-between mb-6">
+                                    <h3 class="font-serif font-bold text-lg text-bakery-brown">Bakery Categories</h3>
+                                    <button onclick="openCategoryModal()" class="bg-bakery-pink hover:bg-bakery-rose text-white text-xs font-semibold px-4 py-2 rounded-xl shadow-sm flex items-center gap-2">
+                                        <i class="fa-solid fa-plus"></i> Add Category
+                                    </button>
+                                </div>
+
+                                <div id="admin-categories-list" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                    <!-- Dynamic categories list -->
+                                </div>
+                            </div>
+
+                            <!-- TAB 3: ORDERS MANAGEMENT -->
+                            <div id="admin-tab-orders" class="admin-subtab hidden">
+                                <h3 class="font-serif font-bold text-lg text-bakery-brown mb-6">Received Orders</h3>
+                                <div class="overflow-x-auto">
+                                    <table class="w-full text-left text-xs text-gray-600 border-collapse">
+                                        <thead>
+                                            <tr class="bg-gray-100 text-gray-700 font-bold border-b">
+                                                <th class="p-3">Order ID</th>
+                                                <th class="p-3">Customer</th>
+                                                <th class="p-3">WhatsApp</th>
+                                                <th class="p-3">Delivery Date</th>
+                                                <th class="p-3">Total</th>
+                                                <th class="p-3">Status</th>
+                                                <th class="p-3 text-right">Update</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="admin-orders-table-body">
+                                            <!-- Dynamic orders -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- TAB 4: WEBSITE SETTINGS -->
+                            <div id="admin-tab-settings" class="admin-subtab hidden space-y-6">
+                                <h3 class="font-serif font-bold text-lg text-bakery-brown mb-4">Manage Brand Information</h3>
+                                
+                                <form onsubmit="saveAdminSettings(event)" class="max-w-2xl space-y-4">
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        <div>
+                                            <label class="block text-xs font-semibold mb-1">Business Name</label>
+                                            <input type="text" id="setting-brand-name" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs">
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs font-semibold mb-1">WhatsApp Number</label>
+                                            <input type="text" id="setting-whatsapp" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs">
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-xs font-semibold mb-1">Hero Headline Text</label>
+                                        <input type="text" id="setting-hero-headline" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs">
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-xs font-semibold mb-1">Top Announcement Bar Text</label>
+                                        <input type="text" id="setting-announcement" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs">
+                                    </div>
+
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        <div>
+                                            <label class="block text-xs font-semibold mb-1">Delivery Fee (Rs.)</label>
+                                            <input type="number" id="setting-delivery-fee" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs">
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs font-semibold mb-1">Logo Image URL</label>
+                                            <input type="url" id="setting-logo-url" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs">
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="bg-bakery-pink hover:bg-bakery-rose text-white text-xs font-semibold px-6 py-3 rounded-xl shadow-md">
+                                        Save Website Settings
+                                    </button>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- SHOPPING CART SLIDE-OUT DRAWER -->
+    <div id="cart-drawer-backdrop" onclick="toggleCartDrawer()" class="fixed inset-0 bg-black/50 z-50 hidden transition-opacity"></div>
+    <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full max-w-md bg-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col justify-between">
+        
+        <!-- Cart Header -->
+        <div class="p-5 border-b flex items-center justify-between bg-cream-50">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-basket-shopping text-bakery-pink text-xl"></i>
+                <h3 class="font-serif font-bold text-lg text-bakery-brown">Your Shopping Cart</h3>
+            </div>
+            <button onclick="toggleCartDrawer()" class="p-2 text-gray-400 hover:text-bakery-brown text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <!-- Cart Items List -->
+        <div id="cart-items-container" class="flex-grow p-5 overflow-y-auto space-y-4">
+            <!-- Dynamic Cart Items JS -->
+        </div>
+
+        <!-- Cart Footer & Checkout Action -->
+        <div class="p-5 border-t bg-cream-50 space-y-3">
+            <div class="space-y-1.5 text-xs">
+                <div class="flex justify-between text-gray-600">
+                    <span>Subtotal</span>
+                    <span id="cart-subtotal-price">Rs. 0</span>
+                </div>
+                <div class="flex justify-between text-gray-600">
+                    <span>Est. Delivery</span>
+                    <span id="cart-delivery-price">Rs. 350</span>
+                </div>
+                <div class="flex justify-between font-bold text-sm text-bakery-brown border-t pt-2">
+                    <span>Total Amount</span>
+                    <span id="cart-grand-total" class="text-bakery-pink text-base">Rs. 350</span>
+                </div>
+            </div>
+
+            <div class="pt-2 space-y-2">
+                <button onclick="proceedToCheckoutView()" class="w-full bg-bakery-pink hover:bg-bakery-rose text-white font-semibold py-3 rounded-xl shadow-md transition-all text-xs flex items-center justify-center gap-2">
+                    Proceed to Checkout &rarr;
+                </button>
+                <button onclick="clearCart()" class="w-full text-[11px] text-gray-400 hover:text-red-500 py-1 font-medium">
+                    Clear Entire Cart
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRODUCT QUICK VIEW MODAL -->
+    <div id="product-modal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden relative max-h-[90vh] flex flex-col md:flex-row">
+            <button onclick="closeProductModal()" class="absolute top-3 right-3 z-10 w-8 h-8 bg-white/80 rounded-full flex items-center justify-center text-gray-600 hover:bg-white shadow-md">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="md:w-1/2 h-64 md:h-auto relative bg-gray-100">
+                <img id="modal-product-img" src="" alt="" class="w-full h-full object-cover">
+            </div>
+
+            <div class="md:w-1/2 p-6 flex flex-col justify-between space-y-4">
+                <div>
+                    <span id="modal-product-category" class="text-[10px] uppercase font-bold text-bakery-pink tracking-wider">Category</span>
+                    <h3 id="modal-product-name" class="font-serif font-bold text-2xl text-bakery-brown mt-1">Product Title</h3>
+                    <p id="modal-product-desc" class="text-xs text-gray-500 mt-2 leading-relaxed">Description text</p>
+                    <div id="modal-product-price" class="font-serif text-2xl font-extrabold text-bakery-pink mt-3">Rs. 0</div>
+                </div>
+
+                <div class="space-y-3 pt-3 border-t">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold text-gray-600">Quantity:</span>
+                        <div class="flex items-center border rounded-lg overflow-hidden">
+                            <button onclick="adjustModalQty(-1)" class="px-3 py-1 bg-gray-100 text-gray-600 hover:bg-gray-200">-</button>
+                            <span id="modal-product-qty" class="px-4 py-1 text-xs font-bold">1</span>
+                            <button onclick="adjustModalQty(1)" class="px-3 py-1 bg-gray-100 text-gray-600 hover:bg-gray-200">+</button>
+                        </div>
+                    </div>
+
+                    <button id="modal-add-cart-btn" onclick="addModalProductToCart()" class="w-full bg-bakery-pink hover:bg-bakery-rose text-white text-xs font-semibold py-3 rounded-xl shadow-md">
+                        Add To Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADMIN PRODUCT EDIT/ADD MODAL -->
+    <div id="admin-product-modal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-lg rounded-3xl shadow-2xl p-6 space-y-4">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 id="admin-modal-title" class="font-serif font-bold text-lg text-bakery-brown">Add / Edit Product</h3>
+                <button onclick="closeAdminProductModal()" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <form onsubmit="saveAdminProduct(event)" class="space-y-3 text-xs">
+                <input type="hidden" id="admin-prod-id">
+                
+                <div>
+                    <label class="block font-semibold mb-1">Product Name</label>
+                    <input type="text" id="admin-prod-name" required class="w-full p-2.5 bg-gray-50 border rounded-xl">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-semibold mb-1">Category</label>
+                        <select id="admin-prod-category" required class="w-full p-2.5 bg-gray-50 border rounded-xl">
+                            <!-- Dynamic category options -->
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block font-semibold mb-1">Price (Rs.)</label>
+                        <input type="number" id="admin-prod-price" required class="w-full p-2.5 bg-gray-50 border rounded-xl">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block font-semibold mb-1">Image URL</label>
+                    <input type="url" id="admin-prod-img" required class="w-full p-2.5 bg-gray-50 border rounded-xl">
+                </div>
+
+                <div>
+                    <label class="block font-semibold mb-1">Short Description</label>
+                    <textarea id="admin-prod-desc" rows="2" class="w-full p-2.5 bg-gray-50 border rounded-xl"></textarea>
+                </div>
+
+                <div class="flex gap-4 items-center pt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" id="admin-prod-featured" class="rounded">
+                        <span>Mark as Featured</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" id="admin-prod-in-stock" checked class="rounded">
+                        <span>In Stock</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="w-full bg-bakery-pink hover:bg-bakery-rose text-white font-semibold py-3 rounded-xl mt-4">
+                    Save Product Details
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-bakery-brown text-amber-100 px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3 translate-y-20 opacity-0 pointer-events-none text-xs font-medium">
+        <i class="fa-solid fa-circle-check text-bakery-gold text-lg"></i>
+        <span id="toast-message">Item added to cart!</span>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-bakery-darkbrown text-amber-100/80 pt-16 pb-8 border-t border-bakery-pink/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-amber-100/10">
+                
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-bakery-pink flex items-center justify-center text-white">
+                            <i class="fa-solid fa-cake-candles"></i>
+                        </div>
+                        <span class="font-serif font-bold text-xl text-white">Nethu Bake House</span>
+                    </div>
+                    <p class="text-xs leading-relaxed text-amber-100/70">
+                        Freshly baked custom cakes, pastries, cupcakes, and desserts. Handcrafted with high quality ingredients and love in Sri Lanka.
+                    </p>
+                    <div class="flex gap-3 text-white text-base">
+                        <a href="#" class="hover:text-bakery-pink transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="hover:text-bakery-pink transition-colors"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://wa.me/94787129345" target="_blank" class="hover:text-emerald-400 transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-serif font-bold text-white text-sm mb-4">Quick Navigation</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><button onclick="showView('home')" class="hover:text-white">Home</button></li>
+                        <li><button onclick="showView('menu')" class="hover:text-white">Menu & Bakery Catalog</button></li>
+                        <li><button onclick="showView('builder')" class="hover:text-white">Custom Cake Studio</button></li>
+                        <li><button onclick="showView('gallery')" class="hover:text-white">Photo Gallery</button></li>
+                        <li><button onclick="showView('about')" class="hover:text-white">About Our Bakery</button></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-serif font-bold text-white text-sm mb-4">Popular Categories</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#" onclick="showView('menu')" class="hover:text-white">Birthday Cakes</a></li>
+                        <li><a href="#" onclick="showView('menu')" class="hover:text-white">Wedding Cakes</a></li>
+                        <li><a href="#" onclick="showView('menu')" class="hover:text-white">Cupcakes & Slices</a></li>
+                        <li><a href="#" onclick="showView('menu')" class="hover:text-white">Fudgy Brownies</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-serif font-bold text-white text-sm mb-4">Direct WhatsApp Order</h4>
+                    <p class="text-xs mb-3 text-amber-100/70">Contact us directly on WhatsApp for custom cake estimates and fast order delivery.</p>
+                    <a href="https://wa.me/94787129345" target="_blank" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-md transition-all">
+                        <i class="fa-brands fa-whatsapp text-base"></i> WhatsApp: 0787129345
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-amber-100/50 gap-4">
+                <p>&copy; 2026 Nethu Bake House. All Rights Reserved.</p>
+                <p>Crafted with ❤️ for Cake & Dessert Lovers.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /* ==========================================================================
+           NETHU BAKE HOUSE - COMPLETE SINGLE PAGE APPLICATION LOGIC
+           ========================================================================== */
+
+        // --- Default Dataset Pre-populated into LocalStorage ---
+        const DEFAULT_CATEGORIES = [
+            { id: 'cat-1', name: 'Birthday Cakes', icon: '🎂' },
+            { id: 'cat-2', name: 'Wedding Cakes', icon: '💒' },
+            { id: 'cat-3', name: 'Custom Cakes', icon: '✨' },
+            { id: 'cat-4', name: 'Cupcakes', icon: '🧁' },
+            { id: 'cat-5', name: 'Cake Slices', icon: '🍰' },
+            { id: 'cat-6', name: 'Brownies', icon: '🍫' },
+            { id: 'cat-7', name: 'Cookies', icon: '🍪' },
+            { id: 'cat-8', name: 'Desserts', icon: '🍮' }
+        ];
+
+        const DEFAULT_PRODUCTS = [
+            {
+                id: 'prod-101',
+                name: 'Signature Chocolate Drip Birthday Cake',
+                category: 'Birthday Cakes',
+                price: 4800,
+                description: 'Rich dark chocolate sponge layers frosted with chocolate ganache and chocolate drip toppings.',
+                image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80',
+                featured: true,
+                inStock: true
+            },
+            {
+                id: 'prod-102',
+                name: 'Classic Red Velvet Cream Cheese Cake',
+                category: 'Birthday Cakes',
+                price: 5200,
+                description: 'Velvety red cocoa layers paired with silky cream cheese frosting.',
+                image: 'https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?auto=format&fit=crop&w=600&q=80',
+                featured: true,
+                inStock: true
+            },
+            {
+                id: 'prod-103',
+                name: 'Floral Elegance Tier Wedding Cake',
+                category: 'Wedding Cakes',
+                price: 14500,
+                description: 'Elegant multi-tier tiered wedding masterpiece decorated with delicate edible florals.',
+                image: 'https://images.unsplash.com/photo-1535141192574-5d4897c13136?auto=format&fit=crop&w=600&q=80',
+                featured: true,
+                inStock: true
+            },
+            {
+                id: 'prod-104',
+                name: 'Gourmet Chocolate Hazelnut Cupcakes (Pack of 6)',
+                category: 'Cupcakes',
+                price: 2400,
+                description: 'Fluffy chocolate cupcakes topped with hazelnut swirl buttercream.',
+                image: 'https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?auto=format&fit=crop&w=600&q=80',
+                featured: true,
+                inStock: true
+            },
+            {
+                id: 'prod-105',
+                name: 'Fudgy Nutella Chocolate Brownie Box',
+                category: 'Brownies',
+                price: 2200,
+                description: 'Ultra fudgy baked brownies swirled with real Nutella spread and roasted cashews.',
+                image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80',
+                featured: false,
+                inStock: true
+            },
+            {
+                id: 'prod-106',
+                name: 'Fresh Berry Vanilla Layer Slice',
+                category: 'Cake Slices',
+                price: 650,
+                description: 'Moist vanilla sponge slice layered with fresh berry compote.',
+                image: 'https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=600&q=80',
+                featured: false,
+                inStock: true
+            }
+        ];
+
+        const DEFAULT_GALLERY = [
+            { url: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80', title: 'Chocolate Drip Celebration Cake', cat: 'cakes' },
+            { url: 'https://images.unsplash.com/photo-1535141192574-5d4897c13136?auto=format&fit=crop&w=600&q=80', title: 'Luxury Floral Tier Wedding Cake', cat: 'wedding' },
+            { url: 'https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?auto=format&fit=crop&w=600&q=80', title: 'Decorated Swirl Cupcakes', cat: 'cupcakes' },
+            { url: 'https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?auto=format&fit=crop&w=600&q=80', title: 'Red Velvet Birthday Cake', cat: 'cakes' },
+            { url: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80', title: 'Artisan Fudgy Brownies', cat: 'cupcakes' },
+            { url: 'https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=600&q=80', title: 'Fresh Berry Gateau Slice', cat: 'cakes' }
+        ];
+
+        // --- Application State Variables ---
+        let appState = {
+            products: [],
+            categories: [],
+            cart: [],
+            orders: [],
+            settings: {
+                brandName: 'Nethu Bake House',
+                whatsapp: '0787129345',
+                deliveryFee: 350,
+                headline: 'Freshly Baked With Love ❤️',
+                announcement: 'Welcome to Nethu Bake House! Order custom cakes online or via WhatsApp: 0787129345'
+            },
+            activeCategoryFilter: 'All',
+            activeModalProduct: null,
+            modalQty: 1,
+            customCake: {
+                size: '500g',
+                basePrice: 2500,
+                flavor: 'Chocolate Fudge',
+                flavorPrice: 0,
+                filling: 'Rich Chocolate Ganache',
+                shape: 'Round Classic',
+                theme: 'Birthday Extravaganza',
+                message: '',
+                imageUrl: '',
+                instructions: ''
+            }
+        };
+
+        // --- Init Function on Page Load ---
+        window.addEventListener('DOMContentLoaded', () => {
+            loadStateFromLocalStorage();
+            renderCategories();
+            renderHomeFeaturedProducts();
+            filterAndRenderProducts();
+            renderGalleryGrid();
+            updateCartUI();
+            updateCustomCakeSummary();
+            
+            // Set default date picker to tomorrow
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            const dateStr = tomorrow.toISOString().split('T')[0];
+            const dateInput = document.getElementById('chk-date');
+            if (dateInput) dateInput.value = dateStr;
+        });
+
+        // --- LocalStorage Storage Handlers ---
+        function loadStateFromLocalStorage() {
+            const savedProducts = localStorage.getItem('nbh_products');
+            const savedCategories = localStorage.getItem('nbh_categories');
+            const savedCart = localStorage.getItem('nbh_cart');
+            const savedOrders = localStorage.getItem('nbh_orders');
+            const savedSettings = localStorage.getItem('nbh_settings');
+
+            appState.products = savedProducts ? JSON.parse(savedProducts) : DEFAULT_PRODUCTS;
+            appState.categories = savedCategories ? JSON.parse(savedCategories) : DEFAULT_CATEGORIES;
+            appState.cart = savedCart ? JSON.parse(savedCart) : [];
+            appState.orders = savedOrders ? JSON.parse(savedOrders) : [];
+            if (savedSettings) appState.settings = JSON.parse(savedSettings);
+
+            // Sync settings to DOM
+            applyStoreSettings();
+        }
+
+        function saveProductsToStorage() {
+            localStorage.setItem('nbh_products', JSON.stringify(appState.products));
+        }
+
+        function saveCategoriesToStorage() {
+            localStorage.setItem('nbh_categories', JSON.stringify(appState.categories));
+        }
+
+        function saveCartToStorage() {
+            localStorage.setItem('nbh_cart', JSON.stringify(appState.cart));
+            updateCartUI();
+        }
+
+        function saveOrdersToStorage() {
+            localStorage.setItem('nbh_orders', JSON.stringify(appState.orders));
+        }
+
+        function saveSettingsToStorage() {
+            localStorage.setItem('nbh_settings', JSON.stringify(appState.settings));
+            applyStoreSettings();
+        }
+
+        function applyStoreSettings() {
+            document.getElementById('site-brand-name').innerText = appState.settings.brandName;
+            document.getElementById('announcement-text').innerText = appState.settings.announcement;
+            document.getElementById('hero-headline').innerText = appState.settings.headline;
+            
+            const waFormatted = appState.settings.whatsapp.replace(/\D/g, '');
+            const waUrl = `https://wa.me/94${waFormatted.slice(-9)}`;
+            
+            document.getElementById('header-whatsapp-btn').href = waUrl;
+            document.getElementById('mobile-whatsapp-link').href = waUrl;
+            document.getElementById('contact-whatsapp-link').href = waUrl;
+            document.getElementById('contact-info-phone').innerText = `${appState.settings.whatsapp} / +94 ${appState.settings.whatsapp.slice(1)}`;
+        }
+
+        // --- VIEW SWITCHING / ROUTING LOGIC ---
+        function showView(viewId) {
+            // Hide all views
+            const views = document.querySelectorAll('.view-section');
+            views.forEach(v => v.classList.add('hidden'));
+
+            // Show target view
+            const target = document.getElementById(`view-${viewId}`);
+            if (target) {
+                target.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // Update nav active style
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('text-bakery-pink', 'font-bold'));
+            const activeNav = document.getElementById(`nav-${viewId}`);
+            if (activeNav) activeNav.classList.add('text-bakery-pink', 'font-bold');
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // --- CATEGORY & MENU RENDER LOGIC ---
+        function renderCategories() {
+            const homeGrid = document.getElementById('home-categories-grid');
+            const menuBadges = document.getElementById('category-filter-badges');
+            const adminCatList = document.getElementById('admin-categories-list');
+
+            if (homeGrid) {
+                homeGrid.innerHTML = appState.categories.map(cat => `
+                    <div onclick="selectMenuCategory('${cat.name}')" class="bg-white p-4 rounded-2xl border border-bakery-pink/15 text-center cursor-pointer hover:shadow-md hover:border-bakery-pink transition-all group">
+                        <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">${cat.icon || '🍰'}</div>
+                        <h4 class="font-serif font-bold text-xs text-bakery-brown">${cat.name}</h4>
+                    </div>
+                `).join('');
+            }
+
+            if (menuBadges) {
+                let badgesHTML = `
+                    <button onclick="selectMenuCategory('All')" class="px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${appState.activeCategoryFilter === 'All' ? 'bg-bakery-pink text-white shadow-sm' : 'bg-cream-100 text-bakery-brown hover:bg-bakery-lightpink'}">
+                        All Items
+                    </button>
+                `;
+
+                badgesHTML += appState.categories.map(cat => `
+                    <button onclick="selectMenuCategory('${cat.name}')" class="px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${appState.activeCategoryFilter === cat.name ? 'bg-bakery-pink text-white shadow-sm' : 'bg-cream-100 text-bakery-brown hover:bg-bakery-lightpink'}">
+                        ${cat.icon || ''} ${cat.name}
+                    </button>
+                `).join('');
+
+                menuBadges.innerHTML = badgesHTML;
+            }
+
+            if (adminCatList) {
+                adminCatList.innerHTML = appState.categories.map(cat => `
+                    <div class="bg-gray-50 p-4 rounded-xl border flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="text-xl">${cat.icon || '🍰'}</span>
+                            <span class="font-bold text-xs text-bakery-brown">${cat.name}</span>
+                        </div>
+                        <button onclick="deleteCategory('${cat.id}')" class="text-red-500 hover:text-red-700 text-xs">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                `).join('');
+            }
+
+            // Also update modal categories dropdown
+            const modalCatSelect = document.getElementById('admin-prod-category');
+            if (modalCatSelect) {
+                modalCatSelect.innerHTML = appState.categories.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
+            }
+        }
+
+        function selectMenuCategory(catName) {
+            appState.activeCategoryFilter = catName;
+            renderCategories();
+            filterAndRenderProducts();
+            showView('menu');
+        }
+
+        function resetMenuFilters() {
+            appState.activeCategoryFilter = 'All';
+            document.getElementById('menu-search-input').value = '';
+            document.getElementById('menu-sort-select').value = 'featured';
+            renderCategories();
+            filterAndRenderProducts();
+        }
+
+        function renderHomeFeaturedProducts() {
+            const container = document.getElementById('home-featured-products');
+            if (!container) return;
+
+            const featured = appState.products.filter(p => p.featured).slice(0, 4);
+            container.innerHTML = featured.map(p => createProductCardHTML(p)).join('');
+        }
+
+        function filterAndRenderProducts() {
+            const grid = document.getElementById('menu-products-grid');
+            const emptyState = document.getElementById('menu-empty-state');
+            const badge = document.getElementById('product-count-badge');
+            
+            const searchVal = (document.getElementById('menu-search-input')?.value || '').toLowerCase();
+            const sortVal = document.getElementById('menu-sort-select')?.value || 'featured';
+
+            let filtered = appState.products.filter(p => {
+                const matchesCategory = appState.activeCategoryFilter === 'All' || p.category === appState.activeCategoryFilter;
+                const matchesSearch = p.name.toLowerCase().includes(searchVal) || p.description.toLowerCase().includes(searchVal);
+                return matchesCategory && matchesSearch;
+            });
+
+            // Sorting
+            if (sortVal === 'price-low') {
+                filtered.sort((a, b) => a.price - b.price);
+            } else if (sortVal === 'price-high') {
+                filtered.sort((a, b) => b.price - a.price);
+            } else if (sortVal === 'name') {
+                filtered.sort((a, b) => a.name.localeCompare(b.name));
+            }
+
+            badge.innerText = `Showing ${filtered.length} Items`;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+            } else {
+                emptyState.classList.add('hidden');
+                grid.innerHTML = filtered.map(p => createProductCardHTML(p)).join('');
+            }
+        }
+
+        function createProductCardHTML(product) {
+            const waMsg = encodeURIComponent(`Hello Nethu Bake House! I would like to order: ${product.name} (Rs. ${product.price.toLocaleString()})`);
+            const waLink = `https://wa.me/94787129345?text=${waMsg}`;
+
+            return `
+                <div class="bg-white rounded-2xl border border-bakery-pink/15 shadow-sm overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                    <div class="relative overflow-hidden h-48 bg-gray-100 cursor-pointer" onclick="openProductQuickView('${product.id}')">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-bakery-brown font-bold text-[10px] px-2.5 py-1 rounded-full shadow-sm">
+                            ${product.category}
+                        </span>
+                        ${product.featured ? '<span class="absolute top-3 right-3 bg-bakery-pink text-white font-bold text-[10px] px-2 py-0.5 rounded-full shadow-sm">★ Featured</span>' : ''}
+                    </div>
+
+                    <div class="p-5 flex-grow flex flex-col justify-between space-y-3">
+                        <div>
+                            <h3 onclick="openProductQuickView('${product.id}')" class="font-serif font-bold text-base text-bakery-brown hover:text-bakery-pink transition-colors cursor-pointer line-clamp-1">
+                                ${product.name}
+                            </h3>
+                            <p class="text-xs text-gray-500 line-clamp-2 mt-1 leading-relaxed">${product.description}</p>
+                        </div>
+
+                        <div class="pt-2 border-t border-gray-100 flex items-center justify-between">
+                            <div>
+                                <span class="text-[10px] text-gray-400 block font-medium">Price</span>
+                                <span class="font-serif font-bold text-lg text-bakery-pink">Rs. ${product.price.toLocaleString()}</span>
+                            </div>
+
+                            <div class="flex items-center gap-1.5">
+                                <a href="${waLink}" target="_blank" class="p-2.5 bg-emerald-100 text-emerald-700 hover:bg-emerald-200 rounded-xl text-xs transition-colors" title="Order directly via WhatsApp">
+                                    <i class="fa-brands fa-whatsapp text-sm"></i>
+                                </a>
+                                <button onclick="addToCartDirect('${product.id}')" class="bg-bakery-brown hover:bg-bakery-darkbrown text-white text-xs font-semibold px-3 py-2.5 rounded-xl shadow-sm transition-all flex items-center gap-1.5">
+                                    <i class="fa-solid fa-basket-shopping"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- QUICK VIEW MODAL HANDLERS ---
+        function openProductQuickView(productId) {
+            const product = appState.products.find(p => p.id === productId);
+            if (!product) return;
+
+            appState.activeModalProduct = product;
+            appState.modalQty = 1;
+
+            document.getElementById('modal-product-img').src = product.image;
+            document.getElementById('modal-product-name').innerText = product.name;
+            document.getElementById('modal-product-category').innerText = product.category;
+            document.getElementById('modal-product-desc').innerText = product.description;
+            document.getElementById('modal-product-price').innerText = `Rs. ${product.price.toLocaleString()}`;
+            document.getElementById('modal-product-qty').innerText = '1';
+
+            document.getElementById('product-modal').classList.remove('hidden');
+        }
+
+        function closeProductModal() {
+            document.getElementById('product-modal').classList.add('hidden');
+        }
+
+        function adjustModalQty(delta) {
+            appState.modalQty = Math.max(1, appState.modalQty + delta);
+            document.getElementById('modal-product-qty').innerText = appState.modalQty;
+        }
+
+        function addModalProductToCart() {
+            if (!appState.activeModalProduct) return;
+            addToCart(appState.activeModalProduct, appState.modalQty);
+            closeProductModal();
+        }
+
+        // --- CUSTOM CAKE BUILDER LOGIC ---
+        function selectCakeOption(type, value, price) {
+            if (type === 'size') {
+                appState.customCake.size = value;
+                appState.customCake.basePrice = price;
+            } else if (type === 'flavor') {
+                appState.customCake.flavor = value;
+                appState.customCake.flavorPrice = price;
+            }
+
+            // Update option active buttons
+            document.querySelectorAll(`.option-btn[data-type="${type}"]`).forEach(btn => {
+                if (btn.dataset.val === value) {
+                    btn.classList.add('active', 'border-bakery-pink', 'bg-bakery-lightpink/30');
+                    btn.classList.remove('border-gray-200');
+                } else {
+                    btn.classList.remove('active', 'border-bakery-pink', 'bg-bakery-lightpink/30');
+                    btn.classList.add('border-gray-200');
+                }
+            });
+
+            updateCustomCakeSummary();
+        }
+
+        function updateCustomCakeSummary() {
+            const filling = document.getElementById('builder-filling-select').value;
+            const shape = document.getElementById('builder-shape-select').value;
+            const theme = document.getElementById('builder-theme-select').value;
+            const msg = document.getElementById('builder-message-input').value;
+            const imgUrl = document.getElementById('builder-image-url').value;
+            const notes = document.getElementById('builder-instructions-input').value;
+
+            appState.customCake.filling = filling;
+            appState.customCake.shape = shape;
+            appState.customCake.theme = theme;
+            appState.customCake.message = msg;
+            appState.customCake.imageUrl = imgUrl;
+            appState.customCake.instructions = notes;
+
+            // Price additions logic
+            let extraPrice = appState.customCake.flavorPrice;
+            if (filling.includes('300')) extraPrice += 300;
+            if (filling.includes('400')) extraPrice += 400;
+            if (filling.includes('450')) extraPrice += 450;
+            if (shape.includes('400')) extraPrice += 400;
+            if (shape.includes('1,500')) extraPrice += 1500;
+            if (theme.includes('1,000')) extraPrice += 1000;
+            if (theme.includes('500')) extraPrice += 500;
+            if (theme.includes('600')) extraPrice += 600;
+
+            const totalEst = appState.customCake.basePrice + extraPrice;
+
+            // DOM Updates
+            document.getElementById('preview-title').innerText = `${appState.customCake.size} ${appState.customCake.flavor} Cake`;
+            document.getElementById('preview-message').innerText = msg ? `"${msg}"` : '"Happy Birthday!"';
+            document.getElementById('summary-filling').innerText = filling;
+            document.getElementById('summary-shape').innerText = shape;
+            document.getElementById('summary-theme').innerText = theme;
+            document.getElementById('builder-estimated-price').innerText = `Rs. ${totalEst.toLocaleString()}`;
+
+            appState.customCake.calculatedTotal = totalEst;
+        }
+
+        function addCustomCakeToCart() {
+            const customItem = {
+                id: `custom-${Date.now()}`,
+                name: `Custom ${appState.customCake.size} ${appState.customCake.flavor} Cake`,
+                price: appState.customCake.calculatedTotal,
+                image: appState.customCake.imageUrl || 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80',
+                quantity: 1,
+                details: `Theme: ${appState.customCake.theme} | Shape: ${appState.customCake.shape} | Message: ${appState.customCake.message || 'None'}`
+            };
+
+            appState.cart.push(customItem);
+            saveCartToStorage();
+            showToast('Custom Cake added to cart!');
+            toggleCartDrawer();
+        }
+
+        function orderCustomCakeViaWhatsApp() {
+            const c = appState.customCake;
+            const text = `Hello Nethu Bake House! I would like to request a Custom Cake Quote:
+----------------------------------
+🎂 *Cake Size:* ${c.size}
+🍫 *Flavor:* ${c.flavor}
+🍮 *Filling:* ${c.filling}
+📐 *Shape:* ${c.shape}
+✨ *Theme:* ${c.theme}
+✍️ *Cake Message:* ${c.message || 'None'}
+🖼️ *Ref Image:* ${c.imageUrl || 'None'}
+📝 *Special Notes:* ${c.instructions || 'None'}
+💰 *Estimated Price:* Rs. ${c.calculatedTotal.toLocaleString()}
+----------------------------------
+Please confirm order availability!`;
+
+            const url = `https://wa.me/94787129345?text=${encodeURIComponent(text)}`;
+            window.open(url, '_blank');
+        }
+
+        // --- SHOPPING CART LOGIC ---
+        function addToCartDirect(productId) {
+            const product = appState.products.find(p => p.id === productId);
+            if (product) addToCart(product, 1);
+        }
+
+        function addToCart(product, qty = 1) {
+            const existing = appState.cart.find(item => item.id === product.id);
+            if (existing) {
+                existing.quantity += qty;
+            } else {
+                appState.cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    quantity: qty,
+                    details: product.category
+                });
+            }
+
+            saveCartToStorage();
+            showToast(`Added ${product.name} to cart!`);
+        }
+
+        function updateCartQty(id, delta) {
+            const item = appState.cart.find(i => i.id === id);
+            if (!item) return;
+
+            item.quantity += delta;
+            if (item.quantity <= 0) {
+                appState.cart = appState.cart.filter(i => i.id !== id);
+            }
+
+            saveCartToStorage();
+        }
+
+        function clearCart() {
+            appState.cart = [];
+            saveCartToStorage();
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cart-badge-count');
+            const container = document.getElementById('cart-items-container');
+            const subtotalEl = document.getElementById('cart-subtotal-price');
+            const deliveryEl = document.getElementById('cart-delivery-price');
+            const grandTotalEl = document.getElementById('cart-grand-total');
+
+            const totalCount = appState.cart.reduce((sum, item) => sum + item.quantity, 0);
+            badge.innerText = totalCount;
+
+            const subtotal = appState.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const delivery = subtotal > 0 ? appState.settings.deliveryFee : 0;
+            const grandTotal = subtotal + delivery;
+
+            subtotalEl.innerText = `Rs. ${subtotal.toLocaleString()}`;
+            deliveryEl.innerText = `Rs. ${delivery.toLocaleString()}`;
+            grandTotalEl.innerText = `Rs. ${grandTotal.toLocaleString()}`;
+
+            if (appState.cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-gray-400 space-y-2">
+                        <i class="fa-solid fa-basket-shopping text-4xl text-bakery-pink/30"></i>
+                        <p class="text-xs font-medium">Your cart is currently empty.</p>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = appState.cart.map(item => `
+                    <div class="flex items-center gap-3 bg-cream-50 p-3 rounded-2xl border border-bakery-pink/10">
+                        <img src="${item.image}" alt="${item.name}" class="w-14 h-14 object-cover rounded-xl border">
+                        <div class="flex-grow min-w-0">
+                            <h4 class="font-serif font-bold text-xs text-bakery-brown truncate">${item.name}</h4>
+                            <p class="text-[10px] text-gray-400 truncate">${item.details || ''}</p>
+                            <span class="font-bold text-xs text-bakery-pink block mt-0.5">Rs. ${item.price.toLocaleString()}</span>
+                        </div>
+                        <div class="flex items-center gap-2 bg-white px-2 py-1 rounded-lg border">
+                            <button onclick="updateCartQty('${item.id}', -1)" class="text-xs text-gray-500 hover:text-bakery-pink font-bold">-</button>
+                            <span class="text-xs font-bold text-bakery-brown">${item.quantity}</span>
+                            <button onclick="updateCartQty('${item.id}', 1)" class="text-xs text-gray-500 hover:text-bakery-pink font-bold">+</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function toggleCartDrawer() {
+            const drawer = document.getElementById('cart-drawer');
+            const backdrop = document.getElementById('cart-drawer-backdrop');
+
+            if (drawer.classList.contains('translate-x-full')) {
+                drawer.classList.remove('translate-x-full');
+                backdrop.classList.remove('hidden');
+            } else {
+                drawer.classList.add('translate-x-full');
+                backdrop.classList.add('hidden');
+            }
+        }
+
+        function proceedToCheckoutView() {
+            if (appState.cart.length === 0) {
+                showToast('Please add items to cart first!');
+                return;
+            }
+            toggleCartDrawer();
+            renderCheckoutSummary();
+            showView('checkout');
+        }
+
+        // --- CHECKOUT & ORDER LOGIC ---
+        function renderCheckoutSummary() {
+            const container = document.getElementById('checkout-items-list');
+            const subtotal = appState.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const delivery = appState.settings.deliveryFee;
+            const grandTotal = subtotal + delivery;
+
+            container.innerHTML = appState.cart.map(item => `
+                <div class="flex justify-between border-b border-gray-200/50 pb-2">
+                    <div>
+                        <p class="font-bold text-bakery-brown">${item.name} (x${item.quantity})</p>
+                        <p class="text-[10px] text-gray-400">${item.details || ''}</p>
+                    </div>
+                    <span class="font-semibold text-bakery-brown">Rs. ${(item.price * item.quantity).toLocaleString()}</span>
+                </div>
+            `).join('');
+
+            document.getElementById('chk-summary-subtotal').innerText = `Rs. ${subtotal.toLocaleString()}`;
+            document.getElementById('chk-summary-delivery').innerText = `Rs. ${delivery.toLocaleString()}`;
+            document.getElementById('chk-summary-total').innerText = `Rs. ${grandTotal.toLocaleString()}`;
+        }
+
+        function processCheckoutOrder(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('chk-name').value;
+            const phone = document.getElementById('chk-phone').value;
+            const address = document.getElementById('chk-address').value;
+            const date = document.getElementById('chk-date').value;
+            const time = document.getElementById('chk-time').value;
+            const notes = document.getElementById('chk-notes').value;
+
+            const subtotal = appState.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const total = subtotal + appState.settings.deliveryFee;
+            const orderId = `NBH-${Math.floor(1000 + Math.random() * 9000)}`;
+
+            const newOrder = {
+                id: orderId,
+                customer: name,
+                phone: phone,
+                address: address,
+                date: date,
+                time: time,
+                notes: notes,
+                items: [...appState.cart],
+                total: total,
+                status: 'Pending',
+                orderDate: new Date().toLocaleDateString()
+            };
+
+            appState.orders.unshift(newOrder);
+            saveOrdersToStorage();
+
+            // Setup WhatsApp message URL
+            const waMsg = generateWhatsAppOrderText(newOrder);
+            const waUrl = `https://wa.me/94787129345?text=${encodeURIComponent(waMsg)}`;
+
+            // UI Confirmation Screen
+            document.getElementById('checkout-form-container').classList.add('hidden');
+            document.getElementById('checkout-success-container').classList.remove('hidden');
+            document.getElementById('success-order-id').innerText = orderId;
+            document.getElementById('success-customer-name').innerText = name;
+            document.getElementById('success-delivery-date').innerText = `${date} (${time})`;
+            document.getElementById('success-total-amount').innerText = `Rs. ${total.toLocaleString()}`;
+            document.getElementById('success-whatsapp-btn').href = waUrl;
+
+            // Clear Cart
+            clearCart();
+        }
+
+        function submitOrderViaWhatsAppOnly() {
+            const name = document.getElementById('chk-name').value || 'Customer';
+            const phone = document.getElementById('chk-phone').value || '';
+            const address = document.getElementById('chk-address').value || 'Delivery';
+            const date = document.getElementById('chk-date').value || 'Asap';
+            const time = document.getElementById('chk-time').value || '';
+
+            const subtotal = appState.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const total = subtotal + appState.settings.deliveryFee;
+
+            const mockOrder = {
+                id: `NBH-WA-${Math.floor(1000 + Math.random() * 9000)}`,
+                customer: name,
+                phone: phone,
+                address: address,
+                date: date,
+                time: time,
+                items: [...appState.cart],
+                total: total
+            };
+
+            const text = generateWhatsAppOrderText(mockOrder);
+            window.open(`https://wa.me/94787129345?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        function generateWhatsAppOrderText(order) {
+            const itemsStr = order.items.map(i => `• ${i.name} (x${i.quantity}) - Rs. ${(i.price * i.quantity).toLocaleString()}`).join('\n');
+            return `Hello Nethu Bake House! I would like to place an order.
+----------------------------------
+👤 *Customer Name:* ${order.customer}
+📞 *Phone/WhatsApp:* ${order.phone}
+📍 *Delivery Address:* ${order.address}
+📅 *Delivery Date:* ${order.date} (${order.time})
+----------------------------------
+🛍️ *Order Items:*
+${itemsStr}
+
+🚚 *Delivery Fee:* Rs. ${appState.settings.deliveryFee}
+💰 *Grand Total:* Rs. ${order.total.toLocaleString()}
+----------------------------------
+Thank you! ❤️`;
+        }
+
+        // --- GALLERY MASONRY FILTER ---
+        function renderGalleryGrid(filter = 'all') {
+            const grid = document.getElementById('gallery-grid');
+            if (!grid) return;
+
+            const items = filter === 'all' ? DEFAULT_GALLERY : DEFAULT_GALLERY.filter(g => g.cat === filter);
+            grid.innerHTML = items.map(item => `
+                <div class="relative group rounded-2xl overflow-hidden border border-bakery-pink/20 shadow-sm h-64 bg-gray-100">
+                    <img src="${item.url}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-bakery-brown/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                        <span class="text-white font-serif font-bold text-sm">${item.title}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterGallery(cat) {
+            document.querySelectorAll('.gallery-filter-btn').forEach(btn => {
+                btn.classList.remove('bg-bakery-pink', 'text-white');
+                btn.classList.add('bg-white', 'text-bakery-brown');
+            });
+            event.target.classList.add('bg-bakery-pink', 'text-white');
+            renderGalleryGrid(cat);
+        }
+
+        // --- ADMIN PANEL LOGIC ---
+        function handleAdminLogin() {
+            document.getElementById('admin-login-screen').classList.add('hidden');
+            document.getElementById('admin-panel-container').classList.remove('hidden');
+            renderAdminDashboard();
+        }
+
+        function handleAdminLogout() {
+            document.getElementById('admin-panel-container').classList.add('hidden');
+            document.getElementById('admin-login-screen').classList.remove('hidden');
+        }
+
+        function switchAdminTab(tabName) {
+            document.querySelectorAll('.admin-subtab').forEach(t => t.classList.add('hidden'));
+            document.getElementById(`admin-tab-${tabName}`).classList.remove('hidden');
+
+            document.querySelectorAll('[id^="admin-tab-btn-"]').forEach(btn => {
+                btn.classList.remove('text-bakery-pink', 'border-b-2', 'border-bakery-pink');
+                btn.classList.add('text-gray-500');
+            });
+
+            const activeBtn = document.getElementById(`admin-tab-btn-${tabName}`);
+            if (activeBtn) {
+                activeBtn.classList.add('text-bakery-pink', 'border-b-2', 'border-bakery-pink');
+                activeBtn.classList.remove('text-gray-500');
+            }
+        }
+
+        function renderAdminDashboard() {
+            // Stats
+            document.getElementById('admin-stat-products').innerText = appState.products.length;
+            document.getElementById('admin-stat-orders').innerText = appState.orders.length;
+            
+            const pending = appState.orders.filter(o => o.status === 'Pending').length;
+            const completed = appState.orders.filter(o => o.status === 'Completed').length;
+            const sales = appState.orders.reduce((sum, o) => sum + o.total, 0);
+
+            document.getElementById('admin-stat-pending').innerText = pending;
+            document.getElementById('admin-stat-completed').innerText = completed;
+            document.getElementById('admin-stat-sales').innerText = `Rs. ${sales.toLocaleString()}`;
+
+            renderAdminProductsTable();
+            renderAdminOrdersTable();
+
+            // Populate Settings Tab inputs
+            document.getElementById('setting-brand-name').value = appState.settings.brandName;
+            document.getElementById('setting-whatsapp').value = appState.settings.whatsapp;
+            document.getElementById('setting-hero-headline').value = appState.settings.headline;
+            document.getElementById('setting-announcement').value = appState.settings.announcement;
+            document.getElementById('setting-delivery-fee').value = appState.settings.deliveryFee;
+        }
+
+        function renderAdminProductsTable() {
+            const tbody = document.getElementById('admin-products-table-body');
+            tbody.innerHTML = appState.products.map(p => `
+                <tr class="border-b hover:bg-gray-50">
+                    <td class="p-3 flex items-center gap-3">
+                        <img src="${p.image}" class="w-10 h-10 object-cover rounded-lg border">
+                        <span class="font-bold text-bakery-brown">${p.name}</span>
+                    </td>
+                    <td class="p-3">${p.category}</td>
+                    <td class="p-3 font-bold text-bakery-pink">Rs. ${p.price.toLocaleString()}</td>
+                    <td class="p-3">
+                        <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${p.inStock ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'}">
+                            ${p.inStock ? 'In Stock' : 'Out of Stock'}
+                        </span>
+                    </td>
+                    <td class="p-3">${p.featured ? '⭐ Yes' : 'No'}</td>
+                    <td class="p-3 text-right space-x-2">
+                        <button onclick="editAdminProduct('${p.id}')" class="text-blue-600 hover:text-blue-800"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button onclick="deleteAdminProduct('${p.id}')" class="text-red-500 hover:text-red-700"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function renderAdminOrdersTable() {
+            const tbody = document.getElementById('admin-orders-table-body');
+            if (appState.orders.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" class="p-4 text-center text-gray-400">No web orders recorded yet.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = appState.orders.map(o => `
+                <tr class="border-b hover:bg-gray-50">
+                    <td class="p-3 font-bold text-bakery-brown">${o.id}</td>
+                    <td class="p-3">${o.customer}</td>
+                    <td class="p-3 text-emerald-600 font-bold">${o.phone}</td>
+                    <td class="p-3">${o.date}</td>
+                    <td class="p-3 font-bold text-bakery-pink">Rs. ${o.total.toLocaleString()}</td>
+                    <td class="p-3">
+                        <select onchange="updateOrderStatus('${o.id}', this.value)" class="p-1 border rounded text-[11px]">
+                            <option value="Pending" ${o.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                            <option value="Confirmed" ${o.status === 'Confirmed' ? 'selected' : ''}>Confirmed</option>
+                            <option value="Preparing" ${o.status === 'Preparing' ? 'selected' : ''}>Preparing</option>
+                            <option value="Completed" ${o.status === 'Completed' ? 'selected' : ''}>Completed</option>
+                            <option value="Cancelled" ${o.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
+                        </select>
+                    </td>
+                    <td class="p-3 text-right">
+                        <button onclick="viewOrderWhatsApp('${o.id}')" class="bg-emerald-600 text-white px-2 py-1 rounded text-[10px]">WhatsApp</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function updateOrderStatus(orderId, status) {
+            const order = appState.orders.find(o => o.id === orderId);
+            if (order) {
+                order.status = status;
+                saveOrdersToStorage();
+                renderAdminDashboard();
+                showToast(`Order ${orderId} updated to ${status}`);
+            }
+        }
+
+        function openProductModal(prodId = null) {
+            document.getElementById('admin-product-modal').classList.remove('hidden');
+            if (prodId) {
+                const p = appState.products.find(x => x.id === prodId);
+                document.getElementById('admin-prod-id').value = p.id;
+                document.getElementById('admin-prod-name').value = p.name;
+                document.getElementById('admin-prod-category').value = p.category;
+                document.getElementById('admin-prod-price').value = p.price;
+                document.getElementById('admin-prod-img').value = p.image;
+                document.getElementById('admin-prod-desc').value = p.description;
+                document.getElementById('admin-prod-featured').checked = p.featured;
+                document.getElementById('admin-prod-in-stock').checked = p.inStock;
+            } else {
+                document.getElementById('admin-prod-id').value = '';
+                document.getElementById('admin-prod-name').value = '';
+                document.getElementById('admin-prod-price').value = '';
+                document.getElementById('admin-prod-img').value = '';
+                document.getElementById('admin-prod-desc').value = '';
+            }
+        }
+
+        function closeAdminProductModal() {
+            document.getElementById('admin-product-modal').classList.add('hidden');
+        }
+
+        function saveAdminProduct(e) {
+            e.preventDefault();
+            const id = document.getElementById('admin-prod-id').value;
+            const newProd = {
+                id: id || `prod-${Date.now()}`,
+                name: document.getElementById('admin-prod-name').value,
+                category: document.getElementById('admin-prod-category').value,
+                price: parseFloat(document.getElementById('admin-prod-price').value),
+                image: document.getElementById('admin-prod-img').value,
+                description: document.getElementById('admin-prod-desc').value,
+                featured: document.getElementById('admin-prod-featured').checked,
+                inStock: document.getElementById('admin-prod-in-stock').checked
+            };
+
+            if (id) {
+                const idx = appState.products.findIndex(p => p.id === id);
+                appState.products[idx] = newProd;
+            } else {
+                appState.products.unshift(newProd);
+            }
+
+            saveProductsToStorage();
+            closeAdminProductModal();
+            filterAndRenderProducts();
+            renderHomeFeaturedProducts();
+            renderAdminDashboard();
+            showToast('Product saved successfully!');
+        }
+
+        function editAdminProduct(id) {
+            openProductModal(id);
+        }
+
+        function deleteAdminProduct(id) {
+            if (confirm('Are you sure you want to delete this product?')) {
+                appState.products = appState.products.filter(p => p.id !== id);
+                saveProductsToStorage();
+                filterAndRenderProducts();
+                renderAdminDashboard();
+                showToast('Product removed!');
+            }
+        }
+
+        function saveAdminSettings(e) {
+            e.preventDefault();
+            appState.settings.brandName = document.getElementById('setting-brand-name').value;
+            appState.settings.whatsapp = document.getElementById('setting-whatsapp').value;
+            appState.settings.headline = document.getElementById('setting-hero-headline').value;
+            appState.settings.announcement = document.getElementById('setting-announcement').value;
+            appState.settings.deliveryFee = parseFloat(document.getElementById('setting-delivery-fee').value);
+
+            saveSettingsToStorage();
+            showToast('Store settings updated!');
+        }
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('contact-name').value;
+            const phone = document.getElementById('contact-phone').value;
+            const message = document.getElementById('contact-message').value;
+
+            const text = `Hello Nethu Bake House! Website Inquiry from ${name} (${phone}):\n\n"${message}"`;
+            window.open(`https://wa.me/94787129345?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        // --- TOAST NOTIFICATION HELPER ---
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
